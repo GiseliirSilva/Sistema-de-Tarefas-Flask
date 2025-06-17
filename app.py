@@ -386,6 +386,12 @@ def atualizar(tarefa_id):
     return redirect(url_for("home"))
 
 
+@app.route('/')
+def index():
+    current_year = datetime.now().year
+    return render_template('index.html', current_year=current_year)
+
+
 # ✅ Rodar app
 if __name__ == "__main__":
     app.run(debug=True)
