@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container"> {# Adicione um container se quiser que siga o estilo padrão #}
+        <h2>Cadastro de Usuário</h2>
+
+        {# Bloco para exibir mensagens flasheadas #}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="flash-message {{ category }}">{{ message }}</div> {# Usando div.flash-message como no login #}
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        {# Fim do bloco de mensagens #}
+
+        <form method="POST">
+            <input type="text" name="nome" placeholder="Nome completo" required>
+            <input type="email" name="email" placeholder="E-mail" required>
+            <input type="password" name="senha" placeholder="Senha" required>
+            <button type="submit">Cadastrar</button>
+        </form>
+        <p style="color: #f9f9f9; text-align: center;">Já tem uma conta? <a href="{{ url_for('login') }}">Entrar</a></p>
+    </div> {# Feche o container #}
+</body>
+
+</html>

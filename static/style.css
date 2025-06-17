@@ -1,0 +1,691 @@
+/* ===== RESET ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===== BODY ===== */
+body {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+    background-color: #e8f5e9;
+    /* Um verde muito claro e suave para o fundo */
+    color: #333;
+    /* Cor do texto padrão para boa legibilidade em fundo claro */
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    min-height: 100vh;
+    /* Garante que o body ocupe a altura total da viewport */
+    align-items: flex-start;
+    /* Alinha o conteúdo ao topo, não ao centro verticalmente */
+}
+
+/* ===== CONTAINER PRINCIPAL (Fundo escuro onde ficam os conteúdos principais) ===== */
+.container {
+    max-width: 900px;
+    width: 100%;
+    padding: 30px;
+    margin: 20px auto;
+    /* Adiciona um pouco de margem superior e inferior */
+    background-color: #036531;
+    /* Verde escuro robusto para o fundo principal */
+    border-radius: 10px;
+    /* Bordas um pouco mais arredondadas */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    /* Sombra mais visível e sutil */
+}
+
+/* ===== TÍTULOS (H1, H2 - no container escuro) ===== */
+h1,
+h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #f9f9f9;
+    /* Branco suave para se destacar no fundo escuro */
+}
+
+/* Regra para o cabeçalho (H1 e botões de login/cadastro/sair) */
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    /* Permite quebrar linha em telas menores */
+    gap: 10px;
+    /* Espaçamento entre os itens do cabeçalho */
+}
+
+.header-top p {
+    /* Estilo para o "Olá, [Nome]!" */
+    color: #f9f9f9;
+    font-size: 18px;
+    font-weight: 500;
+    margin-right: 10px;
+    /* Para separar do botão Sair */
+}
+
+/* Garante que todos os parágrafos diretos dentro do .container sejam brancos */
+.container>p {
+    /* Mais específico para o parágrafo inicial "Organize sua rotina..." */
+    color: #f9f9f9 !important;
+    text-align: center;
+    /* Centraliza a frase de boas-vindas */
+}
+
+/* ===== LINKS (Em geral, exceto botões) ===== */
+a {
+    color: #8be18b;
+    /* Verde claro para links, bom contraste no fundo escuro */
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #a4eda4;
+    /* Verde ainda mais claro no hover */
+}
+
+/* ===== FORMULÁRIOS (Geral) ===== */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+/* Inputs e selects do formulário */
+input[type="text"],
+input[type="date"],
+select,
+input[type="email"],
+input[type="password"] {
+    font-size: 16px;
+    /* Tamanho da fonte levemente maior */
+    padding: 12px;
+    /* Mais preenchimento interno */
+    border: 1px solid #bbb;
+    /* Borda mais suave */
+    border-radius: 4px;
+    color: #333;
+    /* Cor do texto dentro do input */
+    background-color: #fefefe;
+    /* Fundo do input quase branco */
+    width: 100%;
+    /* Garante que inputs ocupem a largura total do formulário */
+}
+
+/* Foco nos inputs e selects */
+input:focus,
+select:focus {
+    outline: none;
+    border-color: #28A745;
+    /* Verde primário na borda ao focar */
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.2);
+    /* Sombra suave ao focar */
+}
+
+/* ===== BOTÕES (Estilo padrão para todos os botões da aplicação) ===== */
+button {
+    background-color: #28A745;
+    /* Verde primário para todos os botões de ação */
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    font-weight: 600;
+    /* Texto dos botões mais forte */
+}
+
+button:hover {
+    background-color: #218838;
+    /* Verde um pouco mais escuro no hover */
+    transform: translateY(-1px);
+    /* Efeito de "levantar" */
+}
+
+button:active {
+    transform: translateY(0);
+    /* Efeito de "pressionar" */
+}
+
+/* ===== MENSAGENS FLASH (Sucesso, Erro, Info, Aviso) ===== */
+.flash-message {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+}
+
+.flash-message.success {
+    background-color: #4CAF50;
+    /* Verde padrão para sucesso */
+}
+
+.flash-message.danger {
+    background-color: #f44336;
+    /* Vermelho padrão para perigo/erro */
+}
+
+.flash-message.info {
+    background-color: #4CAF50;
+    /* Azul padrão para informação */
+}
+
+.flash-message.warning {
+    background-color: #4CAF50;
+    /* Laranja padrão para aviso */
+}
+
+/* ===== CONTADORES DE TAREFAS ===== */
+.contadores {
+    display: flex;
+    justify-content: space-around;
+    /* Distribui os contadores igualmente */
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+    padding: 15px;
+    background-color: #015024;
+    /* Verde escuro ligeiramente mais claro que o container */
+    border-radius: 8px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+    /* Sombra interna sutil */
+}
+
+.contadores p {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 5px 10px;
+    color: white;
+    /* Garante que o texto dos contadores seja branco */
+}
+
+/* ===== LISTA DE TAREFAS ===== */
+ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+/* Regra para o parágrafo "Nenhuma tarefa encontrada" dentro da lista */
+ul p {
+    color: #f9f9f9;
+    /* Define a cor do texto para branco */
+    margin-top: 15px;
+    /* Adiciona um pouco de margem superior para espaçamento */
+    margin-bottom: 15px;
+    /* Adiciona um pouco de margem inferior */
+}
+
+li {
+    background-color: #015024;
+    margin-bottom: 10px;
+    padding: 15px 20px;
+    /* Consistente padding */
+    border-radius: 8px;
+    display: flex;
+    /* Flex container principal */
+    flex-wrap: wrap;
+    /* Permite quebras de linha */
+    justify-content: space-between;
+    /* Empurra info e botões para as extremidades */
+    align-items: center;
+    /* CENTRALIZA VERTICALMENTE os itens dentro do li */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    color: #f9f9f9;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    /* Adicionando transições */
+}
+
+li:hover {
+    background-color: #025327;
+    /* Cor um pouco mais clara ou escura no hover */
+    transform: translateY(-2px);
+    /* Levanta o item ligeiramente */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    /* Sombra mais pronunciada */
+}
+
+/* Div para agrupar descrição, prazo e categoria */
+li .info-tarefa {
+    display: flex;
+    /* Flex container para os detalhes da tarefa */
+    flex-wrap: wrap;
+    align-items: center;
+    /* CENTRALIZA VERTICALMENTE os itens DENTRO do info-tarefa */
+    gap: 15px;
+    /* Espaçamento entre descrição e small tags */
+    flex-grow: 1;
+    /* Ocupa espaço disponível */
+    margin-right: 10px;
+    /* Espaço antes dos botões */
+    /* Garante que não haja padding ou margin extra empurrando para cima */
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+li .descricao {
+    font-weight: 500;
+    font-size: 18px;
+    padding: 0;
+    /* Remove qualquer padding padrão */
+    margin: 0;
+    /* Remove qualquer margin padrão */
+}
+
+li small {
+    font-size: 14px;
+    color: #ffffff;
+    padding: 0;
+    /* Remove qualquer padding padrão */
+    margin: 0;
+    /* Remove qualquer margin padrão */
+}
+
+/* Container dos botões */
+.botoes {
+    display: flex;
+    /* Transforma em container flex para os botões */
+    flex-direction: row;
+    /* Botões lado a lado */
+    gap: 8px;
+    /* Espaçamento entre os botões */
+    flex-wrap: wrap;
+    /* Permite que os botões quebrem linha */
+    align-items: center;
+    /* CENTRALIZA VERTICALMENTE OS BOTÕES DENTRO DE .botoes */
+    /* Garante que não haja padding ou margin extra empurrando para cima */
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/* Formulários dentro do container de botões - CRÍTICO PARA ALINHAMENTO */
+.botoes form {
+    display: flex;
+    /* Faz do form um flex item */
+    align-items: center;
+    /* Centraliza o botão dentro do form */
+    margin: 0;
+    /* Remove qualquer margem padrão do formulário que possa deslocar */
+    padding: 0;
+    /* Remove qualquer padding padrão do formulário */
+}
+
+.botoes button {
+    background-color: #28A745;
+    color: white;
+    padding: 8px 12px;
+    /* Padding ajustado para botões menores */
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    /* REMOVA QUAISQUER MARGENS AQUI TAMBÉM */
+    margin: 0;
+}
+
+.botoes button:hover {
+    background-color: #218838;
+}
+
+/* ===== RESPONSIVIDADE (Ajustes para telas menores) ===== */
+@media (max-width: 768px) {
+
+    li {
+        flex-direction: column;
+        /* Empilha os itens da lista */
+        align-items: flex-start;
+        /* Alinha tudo à esquerda quando empilhado */
+        gap: 8px;
+        /* Espaçamento geral entre os elementos da tarefa */
+        padding: 12px 15px;
+    }
+
+    li .info-tarefa {
+        width: 100%;
+        /* Ocupa a largura total */
+        margin-right: 0;
+        gap: 10px;
+        justify-content: flex-start;
+    }
+
+    li .descricao {
+        width: 100%;
+    }
+
+    li small {
+        margin-left: 0;
+    }
+
+    li .botoes {
+        width: 100%;
+        justify-content: flex-start;
+        /* Alinha os botões à esquerda em mobile */
+        margin-top: 10px;
+        /* Adiciona um espaço acima dos botões em mobile */
+    }
+
+    li .botoes button {
+        width: 100%;
+    }
+}
+
+/* ===== ESTILOS DE STATUS DE TAREFA ===== */
+.tarefa-concluida {
+    background-color: #388e3c;
+    /* Verde mais escuro para concluídas */
+    color: #e0f2e1;
+    /* Texto claro no fundo verde escuro */
+}
+
+.tarefa-concluida .descricao s {
+    color: #e0f2e1;
+    /* Cor para o texto riscado */
+    text-decoration: line-through;
+    /* Garante o risco */
+}
+
+.tarefa-concluida:hover {
+    background-color: #4CAF50;
+    /* Um verde um pouco mais vibrante no hover para concluídas */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.tarefa-pendente {
+    background-color: #4CAF50;
+    color: #ffffff;
+}
+
+.tarefa-pendente small {
+    color: #ffffff;
+}
+
+.atrasada {
+    background-color: #d32f2f;
+    /* Vermelho mais forte para atrasadas */
+    color: #ffebee;
+    /* Texto muito claro no fundo vermelho */
+}
+
+.atrasada small {
+    color: #ffeeee;
+}
+
+.atrasada:hover {
+    background-color: #e53935;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== NAVBAR (Específico para inicio.html, mas mantido aqui para consistência) ===== */
+.navbar {
+    background-color: #036531;
+    /* Cor da navbar igual ao container */
+    padding: 15px 30px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    color: #f9f9f9;
+}
+
+.navbar h1 {
+    font-size: 28px;
+    margin: 0;
+    color: #f9f9f9;
+    /* Garante que o h1 na navbar seja branco */
+}
+
+.navbar .botoes a {
+    margin-left: 15px;
+}
+
+/* ===== HOME-CONTEUDO (da página inicial) ===== */
+.home-conteudo {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.home-conteudo h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #f9f9f9;
+    /* Garante que o h2 na home-conteudo seja branco em fundos escuros */
+}
+
+.home-conteudo p {
+    font-size: 18px;
+    max-width: 600px;
+    margin: 0 auto 30px;
+    line-height: 1.6;
+    color: #f9f9f9;
+    /* Cor de texto para o parágrafo da home (fundo escuro) */
+}
+
+/* ===== FORMULÁRIOS DE FILTROS ===== */
+.filtros {
+    background-color: #015024;
+    /* Fundo dos filtros, igual aos contadores */
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.filtros-form {
+    display: flex;
+    flex-direction: row;
+    /* Layout horizontal dos filtros */
+    flex-wrap: wrap;
+    /* Permite que os itens quebrem linha em telas menores */
+    justify-content: space-between;
+    align-items: flex-end;
+    /* Alinha o botão de filtro à base dos inputs */
+    gap: 15px;
+    /* Espaçamento entre os campos */
+}
+
+.filtros-form .campo {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    /* Permite que cada campo cresça */
+    min-width: 150px;
+    /* Largura mínima para cada campo */
+}
+
+.filtros-form label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #c8e6c9;
+    /* Cor do texto do label */
+}
+
+.filtros-form select,
+.filtros-form input[type="text"] {
+    width: 100%;
+    /* Ocupa a largura total da coluna */
+}
+
+.botao-limpar {
+    display: flex;
+    align-items: flex-end;
+    /* Alinha o botão de limpar com os inputs */
+    margin-top: 0;
+    gap: 10px;
+}
+
+/* Botões específicos do filtro */
+.filtros-form button[type="submit"] {
+    background-color: #28A745;
+    /* Usa o verde primário padronizado */
+    padding: 12px 20px;
+}
+
+.filtros-form button[type="submit"]:hover {
+    background-color: #218838;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 20px;
+        margin: 10px auto;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .header-top {
+        /* Ajusta o cabeçalho para telas menores */
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .header-top p {
+        margin-right: 0;
+    }
+
+    .header-top>div {
+        /* Div que contém os botões de entrar/cadastrar/sair */
+        width: 100%;
+        justify-content: flex-start;
+        /* Alinha os botões à esquerda */
+    }
+
+    /* Navbar Responsiva (para inicio.html) */
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        padding: 15px;
+    }
+
+    .navbar h1 {
+        text-align: left;
+        font-size: 24px;
+    }
+
+    .navbar .botoes {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .navbar .botoes a {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .navbar .botoes button {
+        width: 100%;
+    }
+
+    /* Formulários responsivos */
+    form {
+        gap: 10px;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    select,
+    input[type="email"],
+    input[type="password"] {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+
+    /* Contadores responsivos */
+    .contadores {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+        padding: 10px;
+    }
+
+    /* Filtros responsivos */
+    .filtros-form {
+        flex-direction: column;
+        /* Pilha os filtros verticalmente */
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .filtros-form .campo {
+        min-width: unset;
+        /* Remove largura mínima */
+    }
+
+    /* Lista de Tarefas Responsiva */
+    li {
+        flex-direction: column;
+        align-items: flex-start;
+        /* Alinha todos os itens à esquerda quando empilhado */
+        gap: 8px;
+        /* Espaçamento geral entre os elementos da tarefa */
+        padding: 12px 15px;
+    }
+
+    li .info-tarefa {
+        /* Ajusta o bloco de info para telas menores */
+        width: 100%;
+        /* Ocupa a largura total */
+        margin-right: 0;
+        /* Sem margem direita */
+        gap: 10px;
+        /* Espaçamento menor entre os itens de info */
+    }
+
+    li .descricao {
+        width: 100%;
+        /* Descrição ocupa a largura total se quebrar linha */
+    }
+
+    li small {
+        margin-left: 0;
+        /* Remove qualquer margem extra que possa ter */
+    }
+
+    li .botoes {
+        width: 100%;
+        /* Botões ocupam a largura total */
+        justify-content: flex-start;
+        /* Alinha os botões à esquerda */
+        margin-top: 10px;
+        /* Adiciona um espaço acima dos botões para separá-los das infos */
+    }
+
+    li .botoes button {
+        width: 100%;
+        /* Botões menores ocupam a largura total em telas pequenas */
+    }
+}

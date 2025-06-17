@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistema de Tarefas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header-top">
+            <h1>📝 Sistema de Tarefas</h1>
+            {% if not current_user.is_authenticated %}
+            <div style="display: flex; gap: 10px;">
+                <a href="{{ url_for('login') }}"><button>Entrar</button></a>
+                <a href="{{ url_for('cadastro') }}"><button>Cadastrar</button></a>
+            </div>
+            {% else %}
+            <div style="display: flex; gap: 10px;">
+                <p>Olá, {{ current_user.nome }}!</p> {# Adicionado nome do usuário #}
+                <form action="{{ url_for('logout') }}" method="post">
+                    <button type="submit">Sair</button>
+                </form>
+            </div>
+            {% endif %}
+        </div>
+
+        {# Exibição de mensagens flash #}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="flash-message {{ category }}">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <h2>Bem-vindo!</h2>
+        <p>Organize sua rotina, acompanhe prazos e ganhe produtividade.</p>
+        <br>
+
+        <div class="contadores">
+            <p>✅ Concluídas: {{ total_concluidas }}</p>
+            <p>🕒 Pendentes: {{ total_pendentes }}</p>
+            <p>⚠️ Atrasadas: {{ total_atrasadas }}</p>
+        </div>
+
+        {% if current_user.is_authenticated %}
+        <h2 style="margin-top: 30px;">Nova Tarefa</h2>
+        <form action="{{ url_for('adicionar') }}" method="post">
+            <input type="text" name="tarefa" placeholder="Descrição da tarefa" required>
+            <input type="date" name="prazo">
+            <input type="text" name="categoria" placeholder="Categoria (opcional)">
+            <button type="submit">Adicionar</button>
+        </form>
+        {% else %}
+        <p style="text-align: center; margin-top: 40px;">
+            <strong>Deseja salvar suas tarefas?</strong><br>
+            <a href="{{ url_for('cadastro') }}"><button>Criar Conta</button></a>
+            <a href="{{ url_for('login') }}"><button>Entrar</button></a>
+        </p>
+        {% endif %} {# Este endif fecha o if da linha 44 #}
+        <br>
+
+        <div class="filtros">
+            <form method="get" class="filtros-form">
+                <div class="campo">
+                    <label for="filtro">Status:</label>
+                    <select name="filtro" id="filtro">
+                        <option value="todas" {% if filtro=='todas' %}selected{% endif %}>Todas</option>
+                        <option value="pendentes" {% if filtro=='pendentes' %}selected{% endif %}>Pendentes</option>
+                        <option value="concluidas" {% if filtro=='concluidas' %}selected{% endif %}>Concluídas</option>
+                        <option value="atrasadas" {% if filtro=='atrasadas' %}selected{% endif %}>Atrasadas</option>
+                    </select>
+                </div>
+
+                <div class="campo">
+                    <label for="categoria">Categoria:</label>
+                    <select name="categoria" id="categoria">
+                        <option value="">Todas</option>
+                        {% for categoria_item in categorias %}
+                        <option value="{{ categoria_item }}" {% if categoria_filtro==categoria_item %}selected{% endif
+                            %}>{{ categoria_item }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="campo">
+                    <label for="ordenar">Ordenar por:</label>
+                    <select name="ordenar" id="ordenar">
+                        <option value="">Padrão</option>
+                        <option value="prazo" {% if ordenar_por=='prazo' %}selected{% endif %}>Prazo</option>
+                        <option value="descricao" {% if ordenar_por=='descricao' %}selected{% endif %}>Descrição
+                        </option>
+                    </select>
+                </div>
+
+                <div class="botao-limpar">
+                    <button type="submit" class="aplicar-filtros">Aplicar Filtros</button>
+                    <button type="button" class="limpar-filtros"
+                        onclick="window.location.href='{{ url_for('home') }}' ">Limpar Filtros</button>
+                </div>
+            </form>
+        </div><br>
+
+        <ul>
+            {% for tarefa in tarefas %}
+            {% set classe = "" %}
+            {% if tarefa.concluida %}
+            {% set classe = "tarefa-concluida" %}
+            {% elif tarefa.prazo and tarefa.prazo < data_hoje %} {% set classe="atrasada" %} {% else %} {% set
+                classe="tarefa-pendente" %} {% endif %} <li class="{{ classe }}">
+                <div class="info-tarefa"> {# NOVO: DIV PARA AGRUPAR AS INFORMAÇÕES DA TAREFA #}
+                    {% if tarefa.concluida %}
+                    <span class="descricao"><s>{{ tarefa.titulo }}</s></span>
+                    {% else %}
+                    <span class="descricao">{{ tarefa.titulo }}</span>
+                    {% endif %}
+                    {% if tarefa.prazo %}
+                    <small>Prazo: {{ tarefa.prazo.strftime('%d/%m/%Y') }}</small>
+                    {% endif %}
+                    {% if tarefa.categoria %}
+                    <small>Categoria: {{ tarefa.categoria }}</small>
+                    {% endif %}
+                </div> {# FECHA A DIV info-tarefa #}
+
+                {% if current_user.is_authenticated %}
+                <div class="botoes">
+                    {% if not tarefa.concluida %}
+                    <form action="{{ url_for('concluir', tarefa_id=tarefa.id) }}" method="post">
+                        <button type="submit">Concluir</button>
+                    </form>
+                    {% else %}
+                    <form action="{{ url_for('desfazer', tarefa_id=tarefa.id) }}" method="post">
+                        <button type="submit">Desfazer</button>
+                    </form>
+                    {% endif %}
+                    <form action="{{ url_for('remover', tarefa_id=tarefa.id) }}" method="post">
+                        <button type="submit">Remover</button>
+                    </form>
+                    <form action="{{ url_for('editar', tarefa_id=tarefa.id) }}" method="get">
+                        <button type="submit">Editar</button>
+                    </form>
+                </div>
+                {% endif %}
+                </li>
+                {% else %} {# Este else pertence ao for loop #}
+                <p style="text-align: center;">Nenhuma tarefa encontrada. Adicione uma nova!</p>
+                {% endfor %} {# Este endfor fecha tanto o for quanto seu else #}
+        </ul>
+    </div>
+</body>
+
+</html>

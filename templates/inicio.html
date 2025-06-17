@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Tarefas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    {# CONTAINER PRINCIPAL #}
+    <div class="container">
+        <div class="navbar">
+            <h1>📝 Sistema de Tarefas</h1>
+            <div class="botoes">
+                <a href="{{ url_for('login') }}">
+                    <button>Login</button>
+                </a>
+                <a href="{{ url_for('cadastro') }}">
+                    <button>Cadastrar</button>
+                </a>
+            </div>
+        </div>
+
+        <div class="home-conteudo">
+            <h2>Bem-vindo ao seu gerenciador de tarefas!</h2>
+            <p>Organize sua rotina, acompanhe prazos e ganhe produtividade com facilidade e agilidade.</p>
+            <a href="{{ url_for('home') }}">
+                <button>Começar agora</button>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

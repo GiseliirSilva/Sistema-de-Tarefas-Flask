@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Tarefas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Editar Tarefas</h1>
+
+        {# Formulários #}
+        <form action="{{ url_for('editar', tarefa_id=tarefa.id) }}" method="post">
+            <label style="color: #f9f9f9;">Descrição:</label><br>
+            <input type="text" name="titulo" value="{{ tarefa.titulo }}" required><br><br>
+
+            <label style="color: #f9f9f9;">Prazo:</label><br>
+            <input type="date" name="prazo" value="{{ tarefa.prazo }}"><br><br>
+
+            <label style="color: #f9f9f9;">Categoria:</label><br>
+            <input type="text" name="categoria" value="{{ tarefa.categoria }}"><br><br>
+
+            <button type="submit">Salvar</button>
+            <a href="{{ url_for('home') }}"><button type="button"
+                    style="background-color: #f44336;">Cancelar</button></a>
+        </form>
+    </div>
+</body>
+
+</html>

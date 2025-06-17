@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redefinir Senha</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Redefinir Senha</h2>
+
+        {# Bloco para exibir mensagens flasheadas #}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-message {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        {# Fim do bloco de mensagens #}
+
+        <form method="POST">
+            <input type="password" name="nova_senha" placeholder="Nova Senha" required>
+            <input type="password" name="confirmar_senha" placeholder="Confirmar Nova Senha" required>
+            <button type="submit">Redefinir Senha</button>
+        </form>
+        <p style="color: #f9f9f9; text-align: center;">Lembrou da senha? <a href="{{ url_for('login') }}">Voltar para o Login</a></p>
+    </div>
+</body>
+</html>
