@@ -22,6 +22,8 @@ app.secret_key = os.environ.get('SECRET_KEY')
 if not app.secret_key:
     raise ValueError("A variável de ambiente 'SECRET_KEY' não está definida. Por favor, defina-a.")
 
+app.debug = False
+
 # ✅ Configuração dos objetos com app
 db = SQLAlchemy(app)
 login_manager = LoginManager(app)
