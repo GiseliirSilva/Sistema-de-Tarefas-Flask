@@ -173,16 +173,16 @@ def cadastro():
         # ✅ --- INÍCIO DA NOVA LÓGICA DE VALIDAÇÃO DE SENHA ---
         if len(senha) < 6:
             flash("A senha deve ter pelo menos 6 caracteres.", "error")
-            return render_template("cadastro.html")
+            return render_template("cadastro.html", nome=nome, email=email)
 
         if not any(char.isdigit() for char in senha):
             flash("A senha deve conter pelo menos um número.", "error")
-            return render_template("cadastro.html")
+            return render_template("cadastro.html", nome=nome, email=email)
 
         usuario_existente = Usuario.query.filter_by(email=email).first()
         if usuario_existente:
             flash("Este e-mail já está cadastrado.", "error")
-            return render_template("cadastro.html")
+            return render_template("cadastro.html", nome=nome, email=email)
 
         novo_usuario = Usuario(nome=nome, email=email)
         novo_usuario.set_senha(senha)

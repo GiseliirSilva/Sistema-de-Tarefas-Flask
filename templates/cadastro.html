@@ -23,13 +23,13 @@
         {# Fim do bloco de mensagens #}
 
         <form method="POST">
-            <input type="text" name="nome" placeholder="Nome completo" required>
-            <input type="email" name="email" placeholder="E-mail" required>
+            <input type="text" name="nome" placeholder="Nome completo" value="{{ request.form.get('nome', '') }}" required>
+            <input type="email" name="email" placeholder="E-mail" value="{{ request.form.get('email', '') }}" required>
             <input type="password" name="senha" placeholder="Senha" required>
             <button type="submit">Cadastrar</button>
         </form>
         <p style="color: #f9f9f9; text-align: center;">Já tem uma conta? <a href="{{ url_for('login') }}">Entrar</a></p>
-    </div> {# Feche o container #}
+    </div>
 </body>
 
 </html>

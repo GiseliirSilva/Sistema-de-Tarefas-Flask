@@ -691,7 +691,7 @@ li small {
 }
 
 .main-footer {
-    background-color: #28a745;
+    background-color: #015024;
     color: white !important;
     text-align: center; /* ESTA LINHA DEVE ESTAR PRESENTE */
     padding: 20px 0;
@@ -699,6 +699,7 @@ li small {
     width: 100%; /* GARANTE QUE OCUPA A LARGURA TOTAL DO PAI */
     box-sizing: border-box;
     clear: both;
+    border-radius: 8px;
 }
 
 .main-footer p {
