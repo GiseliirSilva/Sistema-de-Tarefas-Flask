@@ -1,16 +1,13 @@
 # 🚀 Sistema de Tarefas com Flask e Python
 
 ![Python](https://img.shields.io/badge/Python-3.x-blue.svg)
-![Flask](https://img.shields.io/badge/Flask-2.x-lightgrey.svg)
-![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-green.svg)
+![Flask](https://img.shields.io/badge/Flask-3.x-lightgrey.svg) ![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-green.svg)
 ![LoginManager](https://img.shields.io/badge/Flask--Login-blueviolet.svg)
 ![Status](https://img.shields.io/badge/Status-Concluído-brightgreen.svg)
-[![Deploy on Render](https://img.shields.io/badge/Deploy%20on-Render-orange.svg)](https://sistema-de-tarefas-flask.onrender.com/)
-
 
 ## 📄 Sobre o Projeto
 
-Este é um sistema web completo de gerenciamento de tarefas, desenvolvido com o framework **Flask** em **Python**, utilizando **SQLAlchemy** para interação com o banco de dados. 
+Este é um sistema web completo de gerenciamento de tarefas, desenvolvido com o framework **Flask** em **Python**, utilizando **SQLAlchemy** para interação com o banco de dados.
 O projeto permite aos usuários realizar operações CRUD (Criar, Ler, Atualizar, Excluir) em tarefas, além de funcionalidades de autenticação de usuários e redefinição de senha.
 
 O objetivo principal foi a aplicação prática de conhecimentos em desenvolvimento backend e automação com Python, com foco em boas práticas de organização de código e segurança.
@@ -65,8 +62,7 @@ Siga os passos abaixo para configurar e executar o projeto em sua máquina.
     ```
 
 4.  **Configure as Variáveis de Ambiente:**
-    * Crie um arquivo `.env` na raiz do projeto (no mesmo diretório de `aplicativo.py`).
-    * Adicione a seguinte linha, substituindo pelo seu valor:
+    * Crie um arquivo `.env` na raiz do projeto (no mesmo diretório de `app.py`). * Adicione a seguinte linha, substituindo pelo seu valor:
         ```
         SECRET_KEY='sua_chave_secreta_para_desenvolvimento'
         ```
@@ -74,17 +70,16 @@ Siga os passos abaixo para configurar e executar o projeto em sua máquina.
 
 5.  **Execute o Aplicativo:**
     ```bash
-    python aplicativo.py
-    ```
+    python app.py ```
     O servidor estará rodando em `http://127.0.0.1:5000/` (ou outra porta indicada no terminal).
 
 ## ☁️ Deploy Online
 
 Este projeto está publicado e pode ser acessado em:
 
-* **URL:** [https://sistema-de-tarefas-flask.onrender.com/](https://sistema-de-tarefas-flask.onrender.com/)
+* **URL:** [https://GiseliirSilva.pythonanywhere.com/](https://GiseliirSilva.pythonanywhere.com/)
 
-O deploy foi realizado utilizando o **Render**, configurado para rodar o aplicativo com `Gunicorn`.
+O deploy foi realizado utilizando o **PythonAnywhere**, configurado para rodar o aplicativo com `Gunicorn`.
 
 ## 📈 Melhorias Futuras (Roadmap)
 
@@ -107,7 +102,7 @@ O deploy foi realizado utilizando o **Render**, configurado para rodar o aplicat
 
 ## 📜 Licença
 
-Este projeto está sob a licença [MIT License](https://opensource.org/licenses/MIT). 
+Este projeto está sob a licença [MIT License](https://opensource.org/licenses/MIT).
 Você pode escolher outra se preferir, como a Apache 2.0 ou GNU GPL. A MIT é simples e permite bastante liberdade.
 
 ---
