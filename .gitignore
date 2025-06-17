@@ -1,0 +1,18 @@
+# Ignora o ambiente virtual
+venv/
+
+# Ignora arquivos de cache do Python
+__pycache__/
+*.pyc
+
+# Ignora arquivos de variáveis de ambiente
+.env
+
+# Ignora o banco de dados SQLite local
+*.db
+*.sqlite
+*.sqlite3
+
+# Ignora arquivos específicos do IDE (ex: VS Code)
+.vscode/
+.DS_Store # macOS
